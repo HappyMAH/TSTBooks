@@ -1,0 +1,54 @@
+﻿<Window x:Class="Demo_Lib.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Demo_Lib"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="800">
+
+    <Grid>
+        <StackPanel>
+            <ListView x:Name="LibList" Width="800" Height="400" d:ItemsSource="{d:SampleData ItemCount=5}">
+                <ListView.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <WrapPanel Orientation="Vertical"></WrapPanel>
+                    </ItemsPanelTemplate>
+                </ListView.ItemsPanel>
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <Border Width="750" Height="250" BorderThickness="2" BorderBrush="Black">
+                            <StackPanel Orientation="Horizontal" Width="750" Height="250" Background="{Binding DiscountColor}">
+                                <Border Margin="5" Width="150" Height="150" BorderThickness="2" BorderBrush="Black">
+                                    <Image HorizontalAlignment="Center" VerticalAlignment="Center" Width="60" Height="60" Source="{Binding Image}"/>
+                                </Border>
+                                <Border Margin="5" Width="250" Height="150" BorderThickness="2" BorderBrush="Black">
+                                    <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
+                                        <TextBlock Text="{Binding Name}"/>
+                                        <TextBlock Text="{Binding Description}" TextWrapping="WrapWithOverflow" Height="50"/>
+                                        <StackPanel Orientation="Horizontal">
+                                            <TextBlock Text="Производитель:"/>
+                                            <TextBlock Text="{Binding Developer.Name}"/>
+                                        </StackPanel>
+                                        <StackPanel Orientation="Horizontal" x:Name="CostSp">
+                                            <TextBlock Text="Цена:" TextDecorations="OverLine"/>
+                                            <Grid Height="30">
+                                                <TextBlock Text="{Binding GetDiscountCost}" FontSize="22" TextDecorations="Strikethrough" Height="34" HorizontalAlignment="Center"/>
+                                                <!--<Line x:Name="CostLine" Visibility="{Binding GetVisibility}"  Stretch="Fill" Stroke="Black" StrokeThickness="2 " X1="1" Width="40" VerticalAlignment="Center"  HorizontalAlignment="Left"/>-->
+                                            </Grid>
+                                        </StackPanel>
+                                    </StackPanel>
+                                </Border>
+                                <Border Margin="5" Width="150" Height="150" BorderThickness="2" BorderBrush="Black">
+                                    <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
+                                        <TextBlock Text="{Binding Discount}"/>
+                                    </StackPanel>
+                                </Border>
+                            </StackPanel>
+                        </Border>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </StackPanel>
+    </Grid>
+</Window>
